@@ -12,8 +12,8 @@ class CharacterLocationMapper extends Mapper<CharacterLocationEntity, CharacterL
   @override
   CharacterLocationEntity toEntity(CharacterLocationModel item) {
     return CharacterLocationEntity(
-      name: item.name,
-      url: item.url,
+      name: item.name ?? 'No Name',
+      url: item.url ?? 'No url',
     );
   }
 }

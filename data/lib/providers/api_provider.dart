@@ -11,6 +11,12 @@ abstract class ApiProvider {
   factory ApiProvider(Dio dio) = _ApiProvider;
 
   @GET(ApiConstants.character)
-  @NoBody()
-  Future<CharactersEntity> getAllCharacters();
+  Future<CharactersEntity> getAllCharacters(
+    @Query('page') int? page,
+    @Query('name') String? name,
+    @Query('status') String? status,
+    @Query('species') String? species,
+    @Query('type') String? type,
+    @Query('gender') String? gender,
+  );
 }

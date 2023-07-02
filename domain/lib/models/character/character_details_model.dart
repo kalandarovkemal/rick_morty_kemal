@@ -1,11 +1,14 @@
 part of characters_model;
 
+@Collection(inheritance: false)
 class CharacterDetailsModel extends Equatable {
   final int id;
   final String name;
+  @enumerated
   final Status status;
   final String species;
   final String type;
+  @enumerated
   final Gender gender;
   final CharacterLocationModel origin;
   final CharacterLocationModel location;
@@ -13,9 +16,10 @@ class CharacterDetailsModel extends Equatable {
   final List<String> episode;
   final String url;
   final DateTime created;
+  final bool isFavourite;
 
   const CharacterDetailsModel({
-    required this.id,
+    @Index(type: IndexType.value) required this.id,
     required this.name,
     required this.status,
     required this.species,
@@ -27,6 +31,7 @@ class CharacterDetailsModel extends Equatable {
     required this.episode,
     required this.url,
     required this.created,
+    this.isFavourite = false,
   });
 
   CharacterDetailsModel copyWith({
@@ -59,6 +64,7 @@ class CharacterDetailsModel extends Equatable {
     );
   }
 
+  @ignore
   @override
   List<Object?> get props => <Object?>[
         id,
@@ -74,4 +80,6 @@ class CharacterDetailsModel extends Equatable {
         url,
         created,
       ];
+
+  Id get isarId => id;
 }
