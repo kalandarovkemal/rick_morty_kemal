@@ -1,11 +1,17 @@
+import 'package:domain/models/character/characters.dart';
+
 abstract class LocalDataProvider {
-  Future<void> write({required String key, required String value});
+  Future<void> write(CharacterDetailsModel object);
 
-  Future<String?> read(String key);
+  Future<void> writeAllCharacters(List<CharacterDetailsModel> characters);
 
-  Future<void> delete(String key);
+  Future<List<CharacterDetailsModel>> readAllCharacters();
 
-  Future<void> deleteAll();
+  Future<List<CharacterDetailsModel>> readAllFavorites();
 
-  Future<bool> contains(String key);
+  Future<void> delete(int characterId);
+
+  Future<void> deleteAll(List<int> ids);
+
+  Future<bool> isCharacterExist(int characterId);
 }
