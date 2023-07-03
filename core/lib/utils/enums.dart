@@ -10,3 +10,10 @@ enum Gender {
   genderless,
   unknown,
 }
+
+enum CharactersState {
+  initial,
+  loading,
+  loaded,
+  error,
+}

@@ -47,6 +47,7 @@ class CharacterDetailsModel extends Equatable {
     List<String>? episode,
     String? url,
     DateTime? created,
+    bool? isFavourite,
   }) {
     return CharacterDetailsModel(
       id: id ?? this.id,
@@ -61,6 +62,7 @@ class CharacterDetailsModel extends Equatable {
       episode: episode ?? this.episode,
       url: url ?? this.url,
       created: created ?? this.created,
+      isFavourite: isFavourite ?? this.isFavourite,
     );
   }
 
