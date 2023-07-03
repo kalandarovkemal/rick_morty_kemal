@@ -7,8 +7,22 @@ class LocalDataProviderImpl implements LocalDataProvider {
   final Isar _localStorage = LocalStorage.storage;
 
   @override
-  Future<bool> isCharacterExist(int characterId) async {
-    return _localStorage.characterDetailsModels.where().isarIdEqualTo(characterId).isEmpty();
+  Future<void> writeAllCharacters(List<CharacterDetailsModel> characters) async {
+    await _localStorage.writeTxn(() async {
+      await _localStorage.characterDetailsModels.putAll(characters);
+    });
+  }
+
+  @override
+  Future<void> write(CharacterDetailsModel character) async {
+    await _localStorage.writeTxn(() async {
+      await _localStorage.characterDetailsModels.put(character);
+    });
+  }
+
+  @override
+  Future<List<CharacterDetailsModel>> readAllCharacters() {
+    return _localStorage.characterDetailsModels.where().findAll();
   }
 
   @override
@@ -22,14 +36,12 @@ class LocalDataProviderImpl implements LocalDataProvider {
   }
 
   @override
-  Future<List<CharacterDetailsModel>> readAllCharacters() {
-    return _localStorage.characterDetailsModels.where().findAll();
+  Future<bool> isCharacterExist(int characterId) async {
+    return _localStorage.characterDetailsModels.where().isarIdEqualTo(characterId).isEmpty();
   }
 
   @override
-  Future<void> write(CharacterDetailsModel character) async {
-    await _localStorage.writeTxn(() async {
-      await _localStorage.characterDetailsModels.put(character);
-    });
+  Future<List<CharacterDetailsModel>> readAllFavorites() {
+    return _localStorage.characterDetailsModels.filter().isFavouriteEqualTo(true).findAll();
   }
 }
